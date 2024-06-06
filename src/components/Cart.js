@@ -10,25 +10,37 @@ export default function Cart() {
   };
 
   return (
-    <div className="product-container">
-      {cart.map((item) => (
-        <div key={item.id} className="product-card">
-          <div>
-            <img src={item.image} alt="imag" className="product-img" />
-            <h2>{item.name}</h2>
-            <p>${item.price}</p>
-            <input
-              type="number"
-              value={item.quantity}
-              onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-              min="1"
-            />
-            <button className="button" onClick={() => removeFromCart(item.id)}>
-              Remove
-            </button>
-          </div>
+    div className="product-container">
+      {cart.length === 0 ? (
+        <p>Your cart is empty</p>
+      ) : (
+        <div>
+          {cart.map((item) => (
+            <div key={item.id} className="product-card">
+              <div>
+                <img src={item.image} alt="imag" className="product-img" />
+                <h2>{item.name}</h2>
+                <p>${item.price}</p>
+                <input
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) =>
+                    handleQuantityChange(item.id, e.target.value)
+                  }
+                  min="1"
+                />
+                <button
+                  className="button"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+
       <button className="btn-checkout">Checkout</button>
     </div>
   );
